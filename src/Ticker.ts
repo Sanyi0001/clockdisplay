@@ -4,6 +4,8 @@
  * the associated `ClockDisplay` object. The interval can be set via the 
  * constructor in milliseconds. 
  * 
+ * There are 1000 milliseconds in one second.
+ * 
  * This class deals with the complexity of the `setInterval` and `clearInterval`
  * functions in Javascript.
  * 
@@ -17,16 +19,16 @@ class Ticker {
 
     private timerId: number;
 
-    private clockDisplay: ClockDisplay;
+    private animator: Animator;
 
     /**
      * Construct Ticker.
      * 
-     * @param clockDisplay 
+     * @param animator 
      * @param interval optional, default set to 1000 milliseconds
      */
-    public constructor(clockDisplay: ClockDisplay, interval: number = 1000) {
-        this.clockDisplay = clockDisplay;
+    public constructor(animator: Animator, interval: number = 1000) {
+        this.animator = animator;
         this.interval = interval;
     }
 
@@ -41,18 +43,23 @@ class Ticker {
      * Toggles the interval timer. If the timer is running, it will stop the 
      * timer. Otherwise it will start the timer.
      */
-    public startstop() {
+    public toggle() {
         if (this.isRunning()) {
             clearInterval(this.timerId);   
-            this.timerId = null;     
+            this.timerId = null; //so this object knows the timer isn't running.    
         } else {
-            // Use arrow function te prevent the redefinition of `this` when 
-            // the function is called.
-            this.timerId = setInterval(() => {
-                if (this.clockDisplay) {
-                    this.clockDisplay.timeTick();
-                }
-            }, this.interval);        
+            this.timerId = setInterval(this.intervalHandler, this.interval);        
+        }
+    }
+
+    /**
+     * This method is called by the timer at each timing event. This MUST be an 
+     * arrw function because of the redefinition of `this` in other function 
+     * types.
+     */
+    private intervalHandler = () => {
+        if (this.animator) {
+            this.animator.animate();
         }
     }
     

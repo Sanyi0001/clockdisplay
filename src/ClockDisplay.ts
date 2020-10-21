@@ -16,8 +16,6 @@ class ClockDisplay {
     private minutes : NumberDisplay;
     private seconds : NumberDisplay;
 
-    private ticker: Ticker;
-
     private output: HTMLElement;
 
     /**
@@ -32,16 +30,8 @@ class ClockDisplay {
         this.minutes = new NumberDisplay(60);
         this.seconds = new NumberDisplay(60);
         this.updateDisplay();
-        this.ticker = new Ticker(this);
     }
     
-    /**
-     * Toggles the automatic incrementing of the clock.
-     */
-    public startstop() {
-        this.ticker.startstop();
-    }
-
     /**
      * This method should get called once every minute - it makes
      * the clock display go one minute forward.
