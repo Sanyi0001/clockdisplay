@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 
     document.getElementById('tickerButton').addEventListener("click", () => {
         console.log("User clicked ticker button");
-        clock.timeTick();
+        clock.startstop();
     });
     
     document.getElementById('setTime').addEventListener("click", () => {

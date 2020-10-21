@@ -1,10 +1,10 @@
 /**
  * The ClockDisplay class implements a digital clock display for a
- * European-style 24 hour clock. The clock shows hours and minutes. The 
- * range of the clock is 00:00 (midnight) to 23:59 (one minute before 
+ * European-style 24 hour clock. The clock shows hours, minutes and seconds. 
+ * The range of the clock is 00:00:00 (midnight) to 23:59:59 (one second before 
  * midnight).
  * 
- * The clock display receives "ticks" (via the timeTick method) every minute
+ * The clock display receives "ticks" (via the timeTick method) every second
  * and reacts by incrementing the display. This is done in the usual clock
  * fashion: the hour increments when the minutes roll over to zero.
  * 
@@ -15,6 +15,8 @@ class ClockDisplay {
     private hours : NumberDisplay;
     private minutes : NumberDisplay;
     private seconds : NumberDisplay;
+
+    private ticker: Ticker;
 
     private output: HTMLElement;
 
@@ -30,8 +32,16 @@ class ClockDisplay {
         this.minutes = new NumberDisplay(60);
         this.seconds = new NumberDisplay(60);
         this.updateDisplay();
+        this.ticker = new Ticker(this);
     }
     
+    /**
+     * Toggles the automatic incrementing of the clock.
+     */
+    public startstop() {
+        this.ticker.startstop();
+    }
+
     /**
      * This method should get called once every minute - it makes
      * the clock display go one minute forward.

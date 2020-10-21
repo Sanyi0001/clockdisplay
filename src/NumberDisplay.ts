@@ -8,7 +8,7 @@
  * 
  * @author Michael Kölling and David J. Barnes and BugSlayer
  */
-class NumberDisplay {
+class NumberDisplay { 
     private limit: number;
     private value: number;
 
