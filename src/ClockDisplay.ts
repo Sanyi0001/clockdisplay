@@ -12,9 +12,9 @@
  */
 class ClockDisplay {
 
-    private hours : number;
-    private minutes : number;
-    private seconds : number;
+    private hours : NumberDisplay;
+    private minutes : NumberDisplay;
+    private seconds : NumberDisplay;
 
     private output: HTMLElement;
 
@@ -26,9 +26,9 @@ class ClockDisplay {
      */
     public constructor(output: HTMLElement) {
         this.output = output;
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
+        this.hours = new NumberDisplay(24);
+        this.minutes = new NumberDisplay(60);
+        this.seconds = new NumberDisplay(60);
         this.updateDisplay();
     }
     
@@ -37,11 +37,11 @@ class ClockDisplay {
      * the clock display go one minute forward.
      */
     public timeTick() {
-        this.seconds = (this.seconds + 1) % 60;
-        if(this.seconds == 0) {
-            this.minutes = (this.minutes + 1) % 60;
-            if(this.minutes == 0) {
-                this.hours = (this.hours + 1) % 24;
+        this.seconds.increment();
+        if(this.seconds.getValue() == 0) {
+            this.minutes.increment();
+            if(this.minutes.getValue() == 0) {
+                this.hours.increment();
             }
         }
         this.updateDisplay();
@@ -57,12 +57,12 @@ class ClockDisplay {
      */
     public setTime(hours: string, minutes: string, seconds?: string) {
         // Try to update the hours value
-        this.hours = Number(hours);
+        this.hours.setStringValue(hours);
         // Try to update the minutes value
-        this.minutes = Number(minutes);
+        this.minutes.setStringValue(minutes);
         if (seconds) {
             // Try to update the seconds value if this value is given
-            this.seconds = Number(seconds);
+            this.seconds.setStringValue(seconds);
         }
 
         // Update the display
@@ -73,22 +73,7 @@ class ClockDisplay {
      * Update the display element in the DOM.
      */
     private updateDisplay() {
-        let displayString = "";
-        
-        if (this.hours<10) {
-            displayString += "0";
-        }
-        displayString += this.hours + ":";
-
-        if (this.minutes<10) {
-            displayString += "0";
-        }
-        displayString += this.minutes + ":";
-
-        if (this.seconds<10) {
-            displayString += "0";
-        }
-        displayString += this.seconds + ":";
+        const displayString = `${this.hours.getStringValue()}:${this.minutes.getStringValue()}:${this.seconds.getStringValue()}`;
         this.output.innerText = displayString;
     }
 
