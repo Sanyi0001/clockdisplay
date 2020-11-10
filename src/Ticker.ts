@@ -1,7 +1,7 @@
 /**
  * The Ticker class represents the part of the ClockDisplay that acts at a 
- * specific time interval. At that interval, it calls the timeTick method of
- * the associated `ClockDisplay` object. The interval can be set via the 
+ * specific time interval. At that interval, it calls the `step()` method of
+ * the associated `Animator` object. The interval can be set via the 
  * constructor in milliseconds. 
  * 
  * There are 1000 milliseconds in one second.
@@ -15,10 +15,19 @@
  */
 class Ticker {
 
+    /**
+     * The interval in ms of this Ticker.
+     */
     private interval: number;
 
+    /**
+     * A reference to the interval timer so it can be stopped.
+     */
     private timerId: number;
 
+    /**
+     * A reference to the Animator object to call the `step()` method on.
+     */
     private animator: Animator;
 
     /**
@@ -48,18 +57,11 @@ class Ticker {
             clearInterval(this.timerId);   
             this.timerId = null; //so this object knows the timer isn't running.    
         } else {
-            this.timerId = setInterval(this.intervalHandler, this.interval);        
-        }
-    }
-
-    /**
-     * This method is called by the timer at each timing event. This MUST be an 
-     * arrw function because of the redefinition of `this` in other function 
-     * types.
-     */
-    private intervalHandler = () => {
-        if (this.animator) {
-            this.animator.animate();
+            this.timerId = setInterval(() => {
+                if (this.animator) {
+                    this.animator.step();
+                }
+            }, this.interval);        
         }
     }
     

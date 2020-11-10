@@ -24,7 +24,7 @@ class Animator {
      * Handles an interval. This method is called by the `Ticker` at regular
      * intervals when the ticker is running.
      */
-    public animate() {
+    public step() {
         this.clock.timeTick();
     }
 
