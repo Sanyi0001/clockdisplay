@@ -10,13 +10,16 @@ class Animator {
 
     private ticker: Ticker;
 
+    private cat: Cat;
+
     /**
      * Construct Animator.
      * 
      * @param clock 
      */
-    public constructor(clock: ClockDisplay) {
+    public constructor(clock: ClockDisplay, cat: Cat) {
         this.clock = clock;
+        this.cat = cat;
         this.ticker = new Ticker(this);
     }
 
@@ -25,6 +28,7 @@ class Animator {
      * intervals when the ticker is running.
      */
     public step() {
+        this.cat.timeTick();
         this.clock.timeTick();
     }
 
