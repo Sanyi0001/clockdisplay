@@ -7,3 +7,52 @@ canvas{
     font-family: 'Minecraft';
     background-image: url("../images/nebula-bg.jpg");
 }
+
+div{
+    text-align: center;
+    text-size-adjust: 300%;
+    color: black;
+    font-size: 20px;
+}
+
+body{
+    background-color: teal;
+}
+
+span{
+    font-size: 70px;
+    padding: 20px;
+    width: 20px;
+}
+
+p{
+    text-align: center;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    vertical-align: 18px;
+    margin-bottom: 20px;
+  }
+  
+  button:hover {background-color: #3e8e41}
+  
+  button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  h1{
+      margin-top: 0px;
+  }
+

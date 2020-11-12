@@ -5,6 +5,8 @@ class Cat{
     private hunger: Need;
     private energy: Need;
 
+    private happyMeow : HTMLAudioElement;
+
     private outputMood: HTMLElement;
     private outputHunger: HTMLElement;
     private outputEnergy: HTMLElement;
@@ -16,6 +18,7 @@ class Cat{
         this.outputMood = mood;
         this.outputHunger = hunger;
         this.outputEnergy = energy;
+        this.happyMeow = new Audio("meow.mp3");
         // console.log("Cat constructed!");
     }
 
@@ -29,7 +32,7 @@ class Cat{
     }
 
     private meow(){
-        console.log("Meow!");
+        this.happyMeow.play();
     }
 
     public feed(){
@@ -63,7 +66,6 @@ class Cat{
         
         this.isCatStillAlive();
         this.outputDataToDOM()
-        console.log("Cat tick Method called! Hunger: "+this.hunger.getValue());
     }
 
     private outputDataToDOM(){
@@ -77,7 +79,6 @@ class Cat{
             document.getElementById('cat').innerHTML = '<img src="catDead.jpg" alt="A cat">';
             this.finishGame(document.getElementById('catState'));
             setTimeout(() => {this.catIsDead();}, 30);
-            //this.catIsDead();
         } 
     }
 
