@@ -20,6 +20,14 @@ class Cat{
     }
 
     // Methods
+    public startGame(locationId: HTMLElement){
+       locationId.className = "showCat";
+    }
+
+    private finishGame(locationId: HTMLElement){
+        locationId.className = "hideCat";
+    }
+
     private meow(){
         console.log("Meow!");
     }
@@ -28,29 +36,33 @@ class Cat{
         this.hunger.decrement();
         this.mood.increment();
         this.meow();
-        this.outputDataToDOM()
+        
         this.isCatStillAlive();
+        this.outputDataToDOM()
     }
 
     public play(){
         this.mood.increment();
         this.energy.decrement();
         this.meow();
-        this.outputDataToDOM()
+        
         this.isCatStillAlive();
+        this.outputDataToDOM();
     }
 
     public sleep(){
         this.energy.increment();
         this.hunger.increment();  
-        this.outputDataToDOM()
+        
         this.isCatStillAlive();
+        this.outputDataToDOM()
     }
 
     public timeTick(){
         this.hunger.increment();
-        this.outputDataToDOM()
+        
         this.isCatStillAlive();
+        this.outputDataToDOM()
         console.log("Cat tick Method called! Hunger: "+this.hunger.getValue());
     }
 
@@ -58,25 +70,32 @@ class Cat{
         this.outputMood.innerText = this.mood.getValue().toString();
         this.outputHunger.innerText = this.hunger.getValue().toString();
         this.outputEnergy.innerText = this.energy.getValue().toString();
-        // console.log(this.mood,this.hunger,this.energy);
     }
 
     private isCatStillAlive(){
         if (!((this.mood.getNeedIsFulfilled()) && (this.energy.getNeedIsFulfilled()) && (this.hunger.getNeedIsFulfilled())) ) {
-            this.catIsDead();
+            document.getElementById('cat').innerHTML = '<img src="catDead.jpg" alt="A cat">';
+            this.finishGame(document.getElementById('catState'));
+            setTimeout(() => {this.catIsDead();}, 30);
+            //this.catIsDead();
         } 
     }
 
     private catIsDead(){
-        alert("Your cat died because you ignored it's "+this.reasonWhyCatIsDead());
+        window.location.reload();
+        alert(`Your cat died because you ignored it's ${this.reasonWhyCatIsDead()}! Try again!`);
+        
     }
 
     private reasonWhyCatIsDead(){
         if (!this.mood.getNeedIsFulfilled()) {
+            console.log("mood");
             return this.mood.getType();
         } else if(!this.hunger.getNeedIsFulfilled()){
+            console.log("hunger");
             return this.hunger.getType();
         } else {
+            console.log("else:energy");
             return this.energy.getType();
         }
     }

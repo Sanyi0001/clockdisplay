@@ -29,7 +29,7 @@ class ClockDisplay {
         this.hours = new NumberDisplay(24);
         this.minutes = new NumberDisplay(60);
         this.seconds = new NumberDisplay(60);
-        this.updateDisplay();
+        //this.updateDisplay();
     }
     
     /**
@@ -44,7 +44,7 @@ class ClockDisplay {
                 this.hours.increment();
             }
         }
-        this.updateDisplay();
+        //this.updateDisplay();
     }
 
     /**
@@ -66,7 +66,7 @@ class ClockDisplay {
         }
 
         // Update the display
-        this.updateDisplay();
+        //this.updateDisplay();
     }
 
     /**

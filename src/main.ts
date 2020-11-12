@@ -11,16 +11,9 @@ window.addEventListener('load', () => {
     const animator = new Animator(clock,cat);
 
     document.getElementById('tickerButton').addEventListener("click", () => {
-        console.log("User clicked ticker button");
+        console.log("User clicked Start game/pause button");
+        cat.startGame(document.getElementById('catState'));
         animator.toggleAnimation();
-    });
-    
-    document.getElementById('setTime').addEventListener("click", () => {
-        console.log("User clicked setTime button");
-        const hoursInput = document.getElementById('hoursInput') as HTMLInputElement;
-        const minutesInput = document.getElementById('minutesInput') as HTMLInputElement;
-        const secondsInput = document.getElementById('secondsInput') as HTMLInputElement;
-        clock.setTime(hoursInput.value, minutesInput.value, secondsInput.value);
     });
 
     document.getElementById('play').addEventListener("click", () => {

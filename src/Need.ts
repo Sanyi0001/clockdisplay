@@ -9,7 +9,7 @@ class Need{
 
     /**
      * 
-     * @param type type of the need
+     * @param type name of the need
      * @param limit limit, when cat dies
      * @param startingValue starting value
      */
@@ -33,13 +33,15 @@ class Need{
     }
 
     public increment(value: number = 1){
-        this.isNeedFulfilled();
+        
         this.value++;
+        this.isNeedFulfilled();
     }
 
     public decrement(value: number = 1){
-        this.isNeedFulfilled();
+        
         this.value--;
+        this.isNeedFulfilled();
     }
 
     public getValue(): number{
