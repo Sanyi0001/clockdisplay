@@ -19,6 +19,7 @@ class Cat{
         this.outputHunger = hunger;
         this.outputEnergy = energy;
         this.happyMeow = new Audio("meow.mp3");
+        this.outputDataToDOM();
         // console.log("Cat constructed!");
     }
 
